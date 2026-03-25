@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Haider Ejaz — Chemical Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rutgers:     #CC0033;
+  --asu-maroon:  #8C1D40;
+  --asu-gold:    #FFC627;
+  --nust:        #00602A;
+  --nust-gold:   #C8A951;
+  --fulbright:   #003087;
+  --kokes:       #6b3fa0;
+  --uspcase:     #1A5276;
+
+  --bg:          #f4f1eb;
+  --surface:     #ffffff;
+  --surface2:    #eeebe3;
+  --border:      #d8d2c6;
+  --text:        #1a1714;
+  --text-mid:    #3d3830;
+  --text-light:  #6b6357;
+  --accent:      #7a5c1a;
+
+  --sidebar-w: 295px;
+  --r: 5px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Source Serif 4', serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ── LAYOUT ── */
+.resume {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-shadow: 0 0 80px rgba(0,0,0,0.14);
+}
+
+/* ══════════ SIDEBAR ══════════ */
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+.sidebar::-webkit-scrollbar { width: 3px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.nameplate {
+  padding: 1.8rem 1.6rem 1.6rem;
+  background: linear-gradient(170deg, #181410 0%, #2e2519 100%);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.nameplate-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rutgers) 0%, var(--asu-gold) 40%, var(--nust) 70%, var(--fulbright) 100%);
+}
+.nm-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+.nm-name span { color: var(--asu-gold); }
+.nm-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.45rem;
+}
+
+.s-block {
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.s-block:last-child { border-bottom: none; flex-grow: 1; }
+
+.s-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.54rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.s-lbl::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* Contact */
+.crow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  margin-bottom: 0.5rem;
+  text-decoration: none;
+  transition: color 0.15s;
+  line-height: 1.4;
+}
+.crow:hover { color: var(--accent); }
+.ci { width: 13px; height: 13px; flex-shrink: 0; margin-top: 3px; opacity: 0.5; }
+
+/* Award cards */
+.aw-card {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  margin-bottom: 0.5rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+  background: var(--surface);
+}
+.aw-card:last-child { margin-bottom: 0; }
+.aw-card:hover { transform: translateX(3px); box-shadow: 2px 2px 12px rgba(0,0,0,0.07); }
+
+.aw-card.fulbright { border-left: 3px solid var(--fulbright); background: #f5f7fc; }
+.aw-card.kokes     { border-left: 3px solid var(--kokes);     background: #f8f5fd; }
+.aw-card.gold      { border-left: 3px solid var(--nust);      background: #f4faf6; }
+
+.aw-logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 3px;
+}
+.aw-fb { width: 52px; height: 28px; object-fit: contain; flex-shrink: 0; }
+.aw-fallback {
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.52rem; color: #fff; font-weight: 400;
+}
+.aw-title { font-size: 0.74rem; font-weight: 600; color: var(--text); line-height: 1.2; }
+.aw-sub   { font-size: 0.63rem; color: var(--text-light); margin-top: 1px; }
+
+/* Tags */
+.tags { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.57rem;
+  padding: 0.17rem 0.42rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--text-mid);
+  letter-spacing: 0.03em;
+}
+.sg { margin-bottom: 0.8rem; }
+.sg:last-child { margin-bottom: 0; }
+.sg-n { font-size: 0.7rem; font-weight: 600; color: var(--text-mid); margin-bottom: 0.28rem; }
+
+/* ══════════ MAIN ══════════ */
+.main-col {
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(145deg, #181410 0%, #2e2519 55%, #181410 100%);
+  padding: 2.8rem 3rem 2.4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 80% 50%, rgba(255,198,39,0.04) 0%, transparent 60%);
+}
+.hero-bar {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--rutgers), var(--asu-gold), var(--nust), var(--fulbright));
+}
+.hero-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  position: relative;
+}
+.hero-name em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--asu-gold);
+}
+.hero-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  margin-top: 0.55rem;
+  position: relative;
+}
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 0.35rem;
+  margin-top: 1.1rem; position: relative;
+}
+.chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  padding: 0.22rem 0.55rem;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 2px;
+  color: rgba(255,255,255,0.62);
+  letter-spacing: 0.07em;
+}
+
+/* Content */
+.content {
+  padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Section header */
+.s-head {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 2px solid var(--border);
+}
+.s-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  background: var(--text);
+  color: #fff;
+  padding: 0.13rem 0.38rem;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+}
+
+/* Entry card */
+.entry {
+  background: var(--surface);
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--border);
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 0.9rem;
+  transition: box-shadow 0.2s, border-left-color 0.2s;
+}
+.entry:last-child { margin-bottom: 0; }
+.entry:hover { box-shadow: 0 3px 18px rgba(0,0,0,0.07); }
+
+.e-rutgers  { border-left-color: var(--rutgers); }
+.e-asu      { border-left-color: var(--asu-maroon); }
+.e-nust     { border-left-color: var(--nust); }
+.e-uspcase  { border-left-color: var(--uspcase); }
+.e-neutral  { border-left-color: #999; }
+
+.e-rutgers:hover  { box-shadow: 0 3px 18px rgba(204,0,51,0.09); }
+.e-asu:hover      { box-shadow: 0 3px 18px rgba(140,29,64,0.09); }
+.e-nust:hover     { box-shadow: 0 3px 18px rgba(0,96,42,0.09); }
+
+/* Entry inst-row */
+.inst-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: wrap;
+}
+.inst-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 0;
+}
+.ilogo {
+  height: 42px;
+  width: auto;
+  max-width: 70px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 3px;
+}
+.ilogo-sm { height: 30px; }
+
+.multi-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+.logo-plus { color: var(--border); font-size: 0.75rem; }
+
+.period {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--text-light);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  background: var(--surface2);
+  padding: 0.18rem 0.45rem;
+  border-radius: 3px;
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.e-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+.e-org {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-style: italic;
+  margin-top: 1px;
+  line-height: 1.3;
+}
+.e-note {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.87rem;
+  color: var(--accent);
+  margin: 0.45rem 0 0.1rem;
+  line-height: 1.4;
+}
+
+ul.bl { list-style: none; padding: 0; margin-top: 0.5rem; }
+ul.bl li {
+  font-size: 0.81rem;
+  color: var(--text-mid);
+  padding-left: 1rem;
+  position: relative;
+  margin-bottom: 0.25rem;
+  line-height: 1.5;
+}
+ul.bl li::before {
+  content: '▸';
+  position: absolute; left: 0;
+  color: var(--text-light);
+  font-size: 0.62rem;
+  top: 4px;
+}
+
+/* Presentations */
+.pres-item {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 0.55rem;
+  align-items: start;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.pres-item:last-child { border-bottom: none; }
+.pres-n {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--text-light);
+  padding-top: 3px;
+}
+.pres-body { font-size: 0.8rem; color: var(--text-mid); line-height: 1.55; }
+.bdg {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.51rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  letter-spacing: 0.07em;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+.bdg-oral   { background: #fff3cd; color: #7a5800; border: 1px solid #e6b800; }
+.bdg-poster { background: #d0efff; color: #0a4d70; border: 1px solid #85c8f0; }
+.bdg-hon    { background: #d4edda; color: #145523; border: 1px solid #82c89a; }
+
+/* Publications */
+.pub {
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+  border-radius: 0 var(--r) var(--r) 0;
+  margin-bottom: 0.55rem;
+  font-size: 0.79rem;
+  color: var(--text-mid);
+  line-height: 1.55;
+  transition: border-left-color 0.18s;
+}
+.pub:last-child { margin-bottom: 0; }
+.pub:hover { border-left-color: var(--accent); }
+.pub-me { font-weight: 700; color: var(--text); }
+.pub-j { font-family: 'JetBrains Mono', monospace; font-size: 0.63rem; color: var(--text-light); margin-top: 0.18rem; }
+
+/* Manuscripts */
+.ms {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 0.45rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.ms:last-child { border-bottom: none; }
+.ms-n { font-family: 'JetBrains Mono', monospace; font-size: 0.58rem; color: var(--text-light); padding-top: 3px; }
+.ip { color: var(--accent); font-style: italic; }
+
+/* Animations */
+.fi { opacity:0; transform:translateY(8px); animation: fu 0.4s ease forwards; }
+@keyframes fu { to { opacity:1; transform:translateY(0); } }
+.fi:nth-child(1){animation-delay:.05s}.fi:nth-child(2){animation-delay:.1s}
+.fi:nth-child(3){animation-delay:.15s}.fi:nth-child(4){animation-delay:.2s}
+.fi:nth-child(5){animation-delay:.25s}.fi:nth-child(6){animation-delay:.3s}
+.fi:nth-child(7){animation-delay:.35s}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .resume { grid-template-columns: 1fr; }
+  .sidebar {
+    position: static; height: auto;
+    grid-row: 2; border-right: none;
+    border-top: 1px solid var(--border);
+  }
+  .nameplate { display: none; }
+  .main-col { grid-row: 1; }
+  .hero { padding: 1.8rem 1.4rem 1.6rem; }
+  .hero-name { font-size: 2.2rem; }
+  .content { padding: 1.4rem 1.4rem; gap: 2rem; }
+  .inst-row { flex-direction: column; gap: 0.3rem; }
+  .period { align-self: auto; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root { --sidebar-w: 255px; }
+  .hero { padding: 2rem; }
+  .content { padding: 2rem; }
+}
+@media print {
+  body { background: #fff; }
+  .sidebar { position: relative; height: auto; }
+  .resume { box-shadow: none; max-width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="resume">
+
+<!-- ══════════ SIDEBAR ══════════ -->
+<aside class="sidebar">
+
+  <div class="nameplate">
+    <div class="nm-name">Haider <span>Ejaz</span></div>
+    <div class="nm-role">Chemical Engineer · PhD</div>
+    <div class="nameplate-bar"></div>
+  </div>
+
+  <div class="s-block">
+    <div class="s-lbl">Contact</div>
+    <a class="crow" href="tel:+923055183003">
+      <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 5a2 2 0 012-2h3.5l1.5 4-2 1.5a11 11 0 005.5 5.5L14 12l4 1.5v3.5a2 2 0 01-2 2C8.477 19 2 12.523 2 5z"/></svg>
+      +92 305 518 3003
+    </a>
+    <a class="crow" href="mailto:haider.ejaz@scme.nust.edu.pk">
+      <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+      haider.ejaz@scme.nust.edu.pk
+    </a>
+    <a class="crow" href="https://linkedin.com/in/haiderejaz42/" target="_blank">
+      <svg class="ci" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="4"/><path d="M7 10v7M7 7v.01M12 17v-4a2 2 0 014 0v4M12 10v7"/></svg>
+      linkedin.com/in/haiderejaz42
+    </a>
+  </div>
+
+  <div class="s-block">
+    <div class="s-lbl">Honors &amp; Awards</div>
+
+    <div class="aw-card fulbright">
+      <img class="aw-fb"
+           src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Fulbright_Program_Logo.svg/160px-Fulbright_Program_Logo.svg.png"
+           alt="Fulbright"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="aw-fallback" style="background:var(--fulbright);display:none;">FB</div>
+      <div>
+        <div class="aw-title">Fulbright Scholarship</div>
+        <div class="aw-sub">U.S. Dept. of State · 2019</div>
+      </div>
+    </div>
+
+    <div class="aw-card kokes">
+      <div class="aw-fallback" style="background:var(--kokes);font-size:0.48rem;width:38px;height:38px;flex-shrink:0;">NACS</div>
+      <div>
+        <div class="aw-title">Richard J. Kokes Award</div>
+        <div class="aw-sub">N. American Catalysis Soc. · 2022</div>
+      </div>
+    </div>
+
+    <div class="aw-card gold">
+      <img class="aw-logo"
+           src="https://upload.wikimedia.org/wikipedia/en/9/91/NUST_logo.png"
+           alt="NUST Gold Medal"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="aw-fallback" style="background:var(--nust);display:none;">NUST</div>
+      <div>
+        <div class="aw-title">Gold Medal</div>
+        <div class="aw-sub">NUST · 2018</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-block">
+    <div class="s-lbl">Software</div>
+    <div class="sg">
+      <div class="sg-n">Computational Chemistry</div>
+      <div class="tags">
+        <span class="tag">VASP</span><span class="tag">Zacros</span>
+        <span class="tag">MKMCXX</span><span class="tag">ANSYS</span>
+      </div>
+    </div>
+    <div class="sg">
+      <div class="sg-n">Data &amp; Simulation</div>
+      <div class="tags">
+        <span class="tag">Python</span><span class="tag">MATLAB</span>
+        <span class="tag">LabView</span><span class="tag">ASPEN HYSYS</span>
+      </div>
+    </div>
+    <div class="sg">
+      <div class="sg-n">Design &amp; Other</div>
+      <div class="tags">
+        <span class="tag">AutoCAD</span><span class="tag">RETScreen</span>
+        <span class="tag">MS Office</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-block">
+    <div class="s-lbl">Analytical Methods</div>
+    <div class="tags">
+      <span class="tag">Gas Chromatography</span>
+      <span class="tag">HPLC</span><span class="tag">SEM</span>
+      <span class="tag">TGA</span><span class="tag">CHNS Analysis</span>
+    </div>
+  </div>
+
+  <div class="s-block">
+    <div class="s-lbl">Research Interests</div>
+    <div class="tags">
+      <span class="tag">DFT / Ab Initio</span>
+      <span class="tag">Microkinetic Modeling</span>
+      <span class="tag">Kinetic Monte-Carlo</span>
+      <span class="tag">Catalysis</span>
+      <span class="tag">Biofuel Engineering</span>
+      <span class="tag">Fischer–Tropsch</span>
+      <span class="tag">H₂ Production</span>
+      <span class="tag">Particulate Technology</span>
+    </div>
+  </div>
+
+</aside>
+
+<!-- ══════════ MAIN ══════════ -->
+<div class="main-col">
+
+  <div class="hero">
+    <div class="hero-name">Haider <em>Ejaz</em></div>
+    <div class="hero-role">Chemical Engineer &nbsp;·&nbsp; Computational Chemistry &amp; Catalysis &nbsp;·&nbsp; NUST, Pakistan</div>
+    <div class="hero-chips">
+      <span class="chip">DFT · VASP</span>
+      <span class="chip">Microkinetic Modeling</span>
+      <span class="chip">kMC · Zacros</span>
+      <span class="chip">Heterogeneous Catalysis</span>
+      <span class="chip">Particulate Technology</span>
+      <span class="chip">Biofuel Engineering</span>
+    </div>
+    <div class="hero-bar"></div>
+  </div>
+
+  <div class="content">
+
+    <!-- ─ EDUCATION ─ -->
+    <section>
+      <div class="s-head"><span class="s-num">01</span> Education</div>
+
+      <div class="entry e-rutgers fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <img class="ilogo"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Rutgers_University_seal.svg/90px-Rutgers_University_seal.svg.png"
+                 alt="Rutgers"
+                 onerror="this.style.display='none'">
+            <div>
+              <div class="e-title">PhD — Chemical &amp; Biochemical Engineering</div>
+              <div class="e-org">Rutgers, The State University of New Jersey · NJ, USA</div>
+            </div>
+          </div>
+          <div class="period">2019 – 2024</div>
+        </div>
+        <div class="e-note">Dissertation: Phenol deoxygenation over Ru(0001) — effect of oxygen coverage on product selectivity</div>
+      </div>
+
+      <div class="entry e-asu fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <div class="multi-logos">
+              <img class="ilogo ilogo-sm"
+                   src="https://upload.wikimedia.org/wikipedia/en/9/91/NUST_logo.png"
+                   alt="NUST"
+                   onerror="this.style.display='none'">
+              <span class="logo-plus">+</span>
+              <img class="ilogo ilogo-sm"
+                   src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Arizona_State_University_seal.svg/80px-Arizona_State_University_seal.svg.png"
+                   alt="ASU"
+                   onerror="this.style.display='none'">
+            </div>
+            <div>
+              <div class="e-title">MS — Energy Systems Engineering</div>
+              <div class="e-org">U.S.–Pakistan Center for Advanced Studies in Energy, NUST &amp; Arizona State University</div>
+            </div>
+          </div>
+          <div class="period">2014 – 2017</div>
+        </div>
+        <div class="e-note">Thesis: Algal Hydrogen Production using Electrochemical and Fermentative Electron Provision</div>
+      </div>
+
+      <div class="entry e-nust fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <img class="ilogo"
+                 src="https://upload.wikimedia.org/wikipedia/en/9/91/NUST_logo.png"
+                 alt="NUST"
+                 onerror="this.style.display='none'">
+            <div>
+              <div class="e-title">BS — Chemical Engineering</div>
+              <div class="e-org">School of Chemical and Materials Engineering (SCME), NUST, Pakistan</div>
+            </div>
+          </div>
+          <div class="period">2010 – 2014</div>
+        </div>
+        <div class="e-note">Final Year Project: Design of a 1200 MTPD Diammonium Phosphate (DAP) Plant</div>
+      </div>
+    </section>
+
+    <!-- ─ WORK EXPERIENCE ─ -->
+    <section>
+      <div class="s-head"><span class="s-num">02</span> Work Experience</div>
+
+      <div class="entry e-nust fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <img class="ilogo"
+                 src="https://upload.wikimedia.org/wikipedia/en/9/91/NUST_logo.png"
+                 alt="NUST"
+                 onerror="this.style.display='none'">
+            <div>
+              <div class="e-title">Assistant Professor</div>
+              <div class="e-org">School of Chemical and Materials Engineering, NUST, Pakistan</div>
+            </div>
+          </div>
+          <div class="period">Aug 2024 – Present</div>
+        </div>
+        <ul class="bl">
+          <li>Teaching undergraduate Particulate Technology and Instrumentation &amp; Process Control; graduate Molecular Nanotechnology</li>
+          <li>Department Incharge for Internship and Placement</li>
+          <li>Equipment Incharge: TGA, CHNS Analyzer, Calorimeter, and related instruments</li>
+          <li>Curriculum development, academic mentoring, and departmental lab coordination</li>
+        </ul>
+      </div>
+
+      <div class="entry e-uspcase fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <div>
+              <div class="e-title">Research Associate</div>
+              <div class="e-org">U.S.–Pakistan Center for Advanced Studies in Energy, NUST, Pakistan</div>
+            </div>
+          </div>
+          <div class="period">Aug 2017 – Aug 2019</div>
+        </div>
+        <ul class="bl">
+          <li>Analytical characterization via GC, HPLC, SEM, and TGA</li>
+          <li>Managed Fischer-Tropsch / Fossil Fuel lab operations; procured equipment for Biofuel lab</li>
+          <li>Mentored masters students; collaborated with PhD researchers</li>
+        </ul>
+      </div>
+
+      <div class="entry e-uspcase fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <div>
+              <div class="e-title">Design Engineer</div>
+              <div class="e-org">Biofuel Lab, USPCASE, NUST, Pakistan</div>
+            </div>
+          </div>
+          <div class="period">2017</div>
+        </div>
+        <ul class="bl">
+          <li>Led design and oversaw construction of a pilot biogas plant using industrial waste</li>
+          <li>Experimental design for "Valorization of biomass residues for methane production through anaerobic digestion"</li>
+          <li>Collaborated with industrial sponsor; contributed to research papers and conference presentations</li>
+        </ul>
+      </div>
+
+      <div class="entry e-neutral fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <div>
+              <div class="e-title">Intern</div>
+              <div class="e-org">Mari Petroleum Company Ltd, Pakistan</div>
+            </div>
+          </div>
+          <div class="period">2013</div>
+        </div>
+        <ul class="bl">
+          <li>Cross-departmental exposure in petroleum exploration and production</li>
+          <li>Observed gas well drilling operations, gas delivery, and HSE protocols</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─ RESEARCH ─ -->
+    <section>
+      <div class="s-head"><span class="s-num">03</span> Research Experience</div>
+
+      <div class="entry e-rutgers fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <img class="ilogo ilogo-sm"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Rutgers_University_seal.svg/80px-Rutgers_University_seal.svg.png"
+                 alt="Rutgers"
+                 onerror="this.style.display='none'">
+            <div>
+              <div class="e-title">Graduate Research — PhD</div>
+              <div class="e-org">Rutgers University · Advisor: Prof. Fuat E. Celik · 2019–2024</div>
+            </div>
+          </div>
+        </div>
+        <ul class="bl">
+          <li>Phenol deoxygenation mechanisms over Ru catalysts via VASP (DFT / plane-wave)</li>
+          <li>Microkinetic modeling (MKMCXX) and kinetic Monte-Carlo simulations (Zacros)</li>
+          <li>Investigated oxygen coverage effects on catalyst surface and product selectivity</li>
+        </ul>
+      </div>
+
+      <div class="entry e-asu fi">
+        <div class="inst-row">
+          <div class="inst-left">
+            <div class="multi-logos">
+              <img class="ilogo ilogo-sm"
+                   src="https://upload.wikimedia.org/wikipedia/en/9/91/NUST_logo.png"
+                   alt="NUST"
+                   onerror="this.style.display='none'">
+              <span class="logo-plus">+</span>
+              <img class="ilogo ilogo-sm"
+                   src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f3/Arizona_State_University_seal.svg/80px-Arizona_State_University_seal.svg.png"
+                   alt="ASU"
+                   onerror="this.style.display='none'">
+            </div>
+            <div>
+              <div class="e-title">Graduate Research — MS</div>
+              <div class="e-org">USPCASE, NUST &amp; Arizona State University · 2014–2017</div>
+            </div>
+          </div>
+        </div>
+        <ul class="bl">
+          <li>Hydrogen production from algal hydrogenase via microbial electrolysis and photoelectrochemical cells</li>
+          <li>Photoelectrochemical water splitting using hematite photoanodes</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ─ PRESENTATIONS ─ -->
+    <section>
+      <div class="s-head"><span class="s-num">04</span> Conference Presentations</div>
+      <div class="entry e-neutral fi" style="padding:0.8rem 1.2rem;">
+        <div class="pres-item">
+          <div class="pres-n">01</div>
+          <div class="pres-body">Ejaz H., Celik F.E. "Oxygen Coverage Effect on Phenolic Hydrodeoxygenation over Ru(0001) Surface." 28th North American Catalysis Society Meeting, Providence RI, June 2023. <span class="bdg bdg-oral">oral</span></div>
+        </div>
+        <div class="pres-item">
+          <div class="pres-n">02</div>
+          <div class="pres-body">Ejaz H., Celik F.E. "Deoxygenation Mechanism of Phenol over Ru(0001) Surface." 27th North American Catalysis Society Meeting, New York NY, May 2022. <span class="bdg bdg-oral">oral</span></div>
+        </div>
+        <div class="pres-item">
+          <div class="pres-n">03</div>
+          <div class="pres-body">Ejaz H., Celik F.E. "Deoxygenation Mechanism of Phenol over Ru(0001) Surface." Catalysis Society of Metropolitan New York, Annual Symposium, March 2021. <span class="bdg bdg-poster">poster</span> <span class="bdg bdg-hon">honorable mention</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─ PUBLICATIONS ─ -->
+    <section>
+      <div class="s-head"><span class="s-num">05</span> Publications</div>
+
+      <div class="pub fi">Salahuddin U., Iqbal N., Noor T., Hanif S., <span class="pub-me">Ejaz H.</span>, et al. "ZIF-67 Derived MnO₂ Doped Electrocatalyst for Oxygen Reduction Reaction."<div class="pub-j">Catalysts 11, no. 1 (2021) · doi:10.3390/catal11010092</div></div>
+      <div class="pub fi">Qayyum M., Khoja A.H., Naqvi S.R., <span class="pub-me">Ejaz H.</span>, et al. "Development of Cost-Effective Fertilizer-Based Media for Microalgae Cultivation."<div class="pub-j">NUST Journal of Engineering Sciences 13, no. 2 (2020): 45–51</div></div>
+      <div class="pub fi">Liaquat R., Mehmood T., Khoja A.H., Iqbal N., <span class="pub-me">Ejaz H.</span>, Mumtaz S. "Locally Sourced Wastewater as Feedstock of Microbial Desalination Cell for Bioenergy Production."<div class="pub-j">Bioprocess and Biosystems Engineering 44, no. 1 (Jan 2021): 173–84</div></div>
+      <div class="pub fi">Salahuddin U., <span class="pub-me">Ejaz H.</span>, Iqbal N. "Synthesis of Copper Oxide Nanowires — Effect of Oxidation Time on Growth."<div class="pub-j">Materials Research Express 6, no. 3 (2019): 035016</div></div>
+      <div class="pub fi">Salahuddin U., <span class="pub-me">Ejaz H.</span>, Iqbal N. "Grid to Wheel Energy Efficiency Analysis of Battery- and Fuel Cell–Powered Vehicles."<div class="pub-j">International Journal of Energy Research 42, no. 5 (2018): 2021–28</div></div>
+      <div class="pub fi"><span class="pub-me">Ejaz H.</span>, Qadir A., Ali E., Liaquat R. "Electrochemical Integration of Algal Biodiesel Production and Yeast-Based Fermentation for Power Production."<div class="pub-j">Journal of Biotech Research 8 (2017)</div></div>
+      <div class="pub fi">Salahuddin U., Bilal M., <span class="pub-me">Ejaz H.</span> "A Review of Advancements in Helical Baffles for Shell and Tube Heat Exchangers."<div class="pub-j">International Communications in Heat and Mass Transfer 67 (2015): 104–08</div></div>
+    </section>
+
+    <!-- ─ MANUSCRIPTS ─ -->
+    <section>
+      <div class="s-head"><span class="s-num">06</span> Manuscripts in Preparation</div>
+      <div class="entry e-rutgers fi" style="padding:0.8rem 1.2rem;">
+        <div class="ms"><div class="ms-n">01</div><div><span class="pub-me">Ejaz H.</span>, Celik F.E. "DFT Investigation of the Phenol Hydrodeoxygenation Mechanism over Ru(0001)." <span class="ip">In preparation.</span></div></div>
+        <div class="ms"><div class="ms-n">02</div><div><span class="pub-me">Ejaz H.</span>, Celik F.E. "Water Dissociation over Ru(0001) and Associated Oxygen Coverage." <span class="ip">In preparation.</span></div></div>
+        <div class="ms"><div class="ms-n">03</div><div><span class="pub-me">Ejaz H.</span>, Celik F.E. "Effect of Oxygen Coverage on Phenol Hydrodeoxygenation: Exploring the Direct Deoxygenation Mechanism." <span class="ip">In preparation.</span></div></div>
+        <div class="ms"><div class="ms-n">04</div><div><span class="pub-me">Ejaz H.</span>, Celik F.E. "Factors Affecting the Selectivity of Phenolic Hydrodeoxygenation Using Ru-Based Catalysts: A Comprehensive Review." <span class="ip">In preparation.</span></div></div>
+      </div>
+    </section>
+
+  </div>
+</div>
+</div>
+</body>
+</html>
